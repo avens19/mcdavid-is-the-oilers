@@ -18,11 +18,11 @@ type Startup() =
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     member this.Configure(app: IApplicationBuilder, env: IHostingEnvironment) =
-        if env.IsDevelopment() then 
+        if env.IsDevelopment() then
             app.UseDeveloperExceptionPage() |> ignore
 
         app.Run(fun context ->
-            let totalTeamGoals = 
+            let totalTeamGoals =
                 "https://statsapi.web.nhl.com/api/v1/standings"
                 |> Standings.Load
                 |> fun s -> s.Records
@@ -66,6 +66,11 @@ type Startup() =
                             color: #ffffff;
                             font-size: 8rem;
                         }
+                        .disclaimer {
+                            position: fixed;
+                            bottom: 10px;
+                            right: 10px;
+                        }
                     </style>
                 </head>
                 <body>
@@ -74,6 +79,7 @@ type Startup() =
                         <div class=""percent"">" + sprintf "%.2f%%" (playerPoints * 100M / totalTeamGoals) + @"</div>
                         <div class=""message"">of Edmonton's goals</div>
                     </div>
+                    <div class=""disclaimer"">* in 2018/19</div>
                 </body>
             </html>")
         ) |> ignore
