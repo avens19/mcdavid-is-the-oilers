@@ -36,7 +36,7 @@ type Startup() =
                 |> fun r -> r.Stats
                 |> Seq.find(fun r -> r.Splits.Length > 0)
                 |> fun s -> s.Splits
-                |> Seq.find(fun s -> s.Season = 20182019)
+                |> Seq.find(fun s -> s.Season = 20192020)
                 |> fun s -> decimal (s.Stat.Goals + s.Stat.Assists)
 
             context.Response.WriteAsync(@"
@@ -79,7 +79,7 @@ type Startup() =
                         <div class=""percent"">" + sprintf "%.2f%%" (playerPoints * 100M / totalTeamGoals) + @"</div>
                         <div class=""message"">of Edmonton's goals</div>
                     </div>
-                    <div class=""disclaimer"">* in 2018/19</div>
+                    <div class=""disclaimer"">* in 2019/20</div>
                 </body>
             </html>")
         ) |> ignore
